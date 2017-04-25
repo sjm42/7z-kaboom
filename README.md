@@ -54,7 +54,7 @@ getdents(4, /* 585 entries */, 32768)   = 32760
 ```
 
 The first 10k to 20k files will be extracted at a relatively normal speed,
-but after sone 50k files have been extracted, the process is slowing
+but after some 50k files have been extracted, the process is slowing
 down to a crawl.
 
 You may create your own hard-to-extract 7z archive
@@ -66,12 +66,12 @@ like this, for example:
     cd ..
     7z a 7z-kaboom.7z hugedir
 
-I know it is clumsy and a small Python script would have done
-it much faster.
+Yes, I know it is clumsy and a small Python script would have done it much faster.
+
 
 ## TODO
 
-I will soon include an ugly fix for 7z source code as a workaround.
+I will soon include an ugly fix for the 7z source code as a workaround.
 
 
 ## Version data
