@@ -77,6 +77,7 @@ I will soon include an ugly fix for the 7z source code as a workaround.
 ## Version data
 
 Last updated: 2017-04-25
+
 7zip version tested:
 
     7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
