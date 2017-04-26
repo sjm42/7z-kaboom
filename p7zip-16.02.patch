@@ -1,0 +1,39 @@
+--- CPP/Windows/FileFind.cpp.orig	2017-04-26 06:21:50.302815824 -0400
++++ CPP/Windows/FileFind.cpp	2017-04-26 07:48:39.315575833 -0400
+@@ -324,6 +324,36 @@
+ 
+   if (_dirp == 0) return false;
+ 
++  if (strchr(_pattern, '?') == NULL && strchr(_pattern, '*') == NULL) {
++    // It is not a wildcard! Just look up the path, don't scan the directory.
++    closedir(_dirp);
++    _dirp = 0;
++
++    char fullpath[MAX_PATHNAME_LEN];
++    int dirlen = strlen(_directory);
++    if (dirlen + strlen(_pattern) + 2 >= MAX_PATHNAME_LEN)
++      throw "CFindFile::FindFirst - internal error - MAX_PATHNAME_LEN";
++    strcpy(fullpath, _directory);
++    fullpath[dirlen++] = CHAR_PATH_SEPARATOR;
++    strcpy(&fullpath[dirlen], _pattern);
++
++    struct stat sb;
++
++    if (stat(fullpath, &sb) != 0) {
++      // Not found
++      SetLastError( ERROR_NO_MORE_FILES );
++      return false;
++    }
++
++    int retf = fillin_CFileInfo(fi, _directory, _pattern, ignoreLink);
++    if (retf) {
++      SetLastError( ERROR_NO_MORE_FILES );
++      return false;
++    }
++    // Success
++    return true;
++  }
++
+   struct dirent *dp;
+   while ((dp = readdir(_dirp)) != NULL) {
+     if (filter_pattern(dp->d_name,(const char *)_pattern,0) == 1) {
