@@ -104,6 +104,81 @@ Just a normal stat() call is made to check the existence
 of the given filename.
 
 
+## Results
+
+Extracting the sample archive with unfixed 7za takes
+22 minutes on a fast machine.
+
+```
+% time ~/p7zip_16.02/bin/7za x 7z-kaboom.7z 
+
+7-Zip (a) [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,56 CPUs x64)
+
+Scanning the drive for archives:
+1 file, 1927937 bytes (1883 KiB)
+
+Extracting archive: 7z-kaboom.7z
+--
+Path = 7z-kaboom.7z
+Type = 7z
+Physical Size = 1927937
+Headers Size = 1913422
+Method = LZMA:24
+Solid = +
+Blocks = 1
+
+Everything is Ok                                     
+
+Folders: 1
+Files: 100000
+Size:       102400000
+Compressed: 1927937
+
+real	22m36.940s
+user	3m35.887s
+sys	19m0.180s
+```
+
+
+Extracting the sample archive with fixed 7za takes a few seconds.
+
+
+```
+% time ~/p7zip_16.02/bin/7za x 7z-kaboom.7z 
+
+7-Zip (a) [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,56 CPUs x64)
+
+Scanning the drive for archives:
+1 file, 1927937 bytes (1883 KiB)
+
+Extracting archive: 7z-kaboom.7z
+--
+Path = 7z-kaboom.7z
+Type = 7z
+Physical Size = 1927937
+Headers Size = 1913422
+Method = LZMA:24
+Solid = +
+Blocks = 1
+
+Everything is Ok                                     
+
+Folders: 1
+Files: 100000
+Size:       102400000
+Compressed: 1927937
+
+real	0m3.683s
+user	0m1.356s
+sys	0m2.325s
+
+```
+
+Now we are talking!
+
+
 ## Version data
 
 Last updated: 2017-04-26
